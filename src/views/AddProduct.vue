@@ -24,11 +24,22 @@
         ></b-form-input>
       </b-form-group>
       <!-- Product color -->
+      <!-- Product color -->
+      <b-form-group id="input-group-2" label="Image (optional):" label-for="input-2">
+        <b-form-input
+          id="input-3"
+          v-model="form.image"
+          required
+          type="text"
+          placeholder="Enter a image src for your product"
+        ></b-form-input>
+      </b-form-group>
+      <!-- Product color -->
 
       <!-- Product price -->
       <b-form-group id="input-group-2" label="Price (CHF):" label-for="input-2">
         <b-form-input
-          id="input-2"
+          id="input-4"
           type="number"
           v-model="form.price"
           required
@@ -38,8 +49,15 @@
       <!-- Product price -->
 
       <b-button type="submit" variant="primary">Add Product</b-button>
+      <!-- Error Message -->
       <b-alert class="mt-4" v-model="showDismissibleAlert" variant="danger" dismissible>
         {{ ErrorMessage }}
+      </b-alert>
+      <!-- Error Message -->
+
+      <!-- Success Message -->
+      <b-alert class="mt-4" v-model="showSuccessAlert" variant="success" dismissible>
+        Article added Successfull
       </b-alert>
     </b-form>
     <b-card class="mt-3" header="Form Data Result">
@@ -56,7 +74,7 @@ export default {
         product: "",
         color: "",
         price: null,
-        checked: []
+        image: ""
       },
       foods: [
         { text: "Select One", value: null },
@@ -66,13 +84,24 @@ export default {
         "Corn"
       ],
       showDismissibleAlert: false,
+      showSuccessAlert: false,
       ErrorMessage: "Default message"
     };
   },
   methods: {
     onSubmit(evt) {
       evt.preventDefault();
-      alert(JSON.stringify(this.form));
+      this.$store.commit("addItem", this.form);
+      this.showSuccesAlert = true;
+      this.form.product = "";
+      this.form.color = "";
+      this.form.price = null;
+      this.form.image = "";
+
+      //alert message
+      this.showSuccessAlert = true;
+
+      // alert(JSON.stringify(this.form));
     },
     onReset(evt) {
       evt.preventDefault();

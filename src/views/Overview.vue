@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="col offset-2">
     <div v-for="(phone, index) in phones" :key="index" class="grid-container">
       <CardComponent :phone="phone" />
     </div>
@@ -20,6 +20,10 @@ export default {
   },
   computed: {
     ...mapState(["phones"])
+  },
+  created() {
+    console.log("Done");
+    this.$store.commit("getInitialState");
   }
 };
 </script>
