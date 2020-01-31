@@ -3,19 +3,22 @@
     <b-row no-gutters>
       <b-col md="6">
         <b-card-img
-          :src="phone.image"
+          :src="phone.image ? phone.image : imageDefault"
           class="rounded-0"
           style="width: 70%; min-height: 80%;"
         ></b-card-img>
       </b-col>
       <b-col md="6">
         <b-card-body :title="phone.product">
-          <b-card-text> Price: {{ phone.price }} CHF </b-card-text>
+          <b-card-text> Color: {{ phone.color }} </b-card-text>
+          <b-card-text> Index: {{ index }} </b-card-text>
           <b-card-text>
-            <b-button variant="primary">Go to the product</b-button>
+            Price: {{ phone.price ? phone.price : defaultPrice }} CHF
           </b-card-text>
           <b-card-text>
-            <b-button variant="warning">Edit this product</b-button>
+            <b-button variant="warning" @click="goToEdit(index)"
+              >Edit this product</b-button
+            >
           </b-card-text>
         </b-card-body>
       </b-col>
@@ -30,6 +33,20 @@ export default {
     phone: {
       type: Object,
       required: true
+    },
+    index: {
+      type: Number
+    }
+  },
+  data() {
+    return {
+      defaultPrice: 0,
+      imageDefault: "http://denrakaev.com/wp-content/uploads/2015/03/no-image-800x511.png"
+    };
+  },
+  methods: {
+    goToEdit(id) {
+      this.$router.push("edit");
     }
   }
 };

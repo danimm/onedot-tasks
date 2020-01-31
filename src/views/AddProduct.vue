@@ -24,7 +24,8 @@
         ></b-form-input>
       </b-form-group>
       <!-- Product color -->
-      <!-- Product color -->
+
+      <!-- Product image -->
       <b-form-group id="input-group-2" label="Image (optional):" label-for="input-2">
         <b-form-input
           id="input-3"
@@ -34,7 +35,7 @@
           placeholder="Enter a image src for your product"
         ></b-form-input>
       </b-form-group>
-      <!-- Product color -->
+      <!-- Product image -->
 
       <!-- Product price -->
       <b-form-group id="input-group-2" label="Price (CHF):" label-for="input-2">
@@ -50,7 +51,13 @@
 
       <b-button type="submit" variant="primary">Add Product</b-button>
       <!-- Error Message -->
-      <b-alert class="mt-4" v-model="showDismissibleAlert" variant="danger" dismissible>
+      <b-alert
+        class="mt-4"
+        v-show="ErrorMessage"
+        v-model="showDismissibleAlert"
+        variant="danger"
+        dismissible
+      >
         {{ ErrorMessage }}
       </b-alert>
       <!-- Error Message -->
@@ -67,7 +74,9 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
+  name: "addProduct",
   data() {
     return {
       form: {
@@ -76,40 +85,47 @@ export default {
         price: null,
         image: ""
       },
-      foods: [
-        { text: "Select One", value: null },
-        "Carrots",
-        "Beans",
-        "Tomatoes",
-        "Corn"
-      ],
       showDismissibleAlert: false,
       showSuccessAlert: false,
-      ErrorMessage: "Default message"
+      ErrorMessage: "",
+      duplicateColor: null,
+      errors: 0
     };
+  },
+  created() {
+    console.log(this.phones);
+  },
+  computed: {
+    ...mapState(["phones"])
   },
   methods: {
     onSubmit(evt) {
       evt.preventDefault();
-      this.$store.commit("addItem", this.form);
-      this.showSuccesAlert = true;
-      this.form.product = "";
-      this.form.color = "";
-      this.form.price = null;
-      this.form.image = "";
+
+      let formColor = this.color;
+      const phonesColors = this.phones.filter(phone => phone.color);
+      console.log(phonesColors);
+      debugger;
+      //validation
+      if (UsedColors.includes(this.color)) {
+        this.ErrorMessage = "Color is already used, take another";
+        this.errors++;
+      }
+
+      if ((this.errors = 0)) {
+        this.$store.commit("addItem", this.form);
+        this.showSuccesAlert = true;
+        this.form.product = "";
+        this.form.color = "";
+        this.form.price = null;
+        this.form.image = "";
+      }
 
       //alert message
-      this.showSuccessAlert = true;
-
-      // alert(JSON.stringify(this.form));
+      // this.showSuccessAlert = true;
     },
     onReset(evt) {
       evt.preventDefault();
-      // Reset our form values
-      this.form.email = "";
-      this.form.name = "";
-      this.form.food = null;
-      this.form.checked = [];
       // Trick to reset/clear native browser form validation state
       this.show = false;
       this.$nextTick(() => {

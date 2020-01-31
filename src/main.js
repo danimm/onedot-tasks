@@ -13,6 +13,10 @@ Vue.use(BootstrapVue);
 // Optionally install the BootstrapVue icon components plugin
 Vue.use(IconsPlugin);
 
+// Validations
+import Vuelidate from "vuelidate";
+Vue.use(Vuelidate);
+
 Vue.config.productionTip = false;
 
 new Vue({
