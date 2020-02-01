@@ -53,7 +53,7 @@
           </b-form-group>
           <!-- Product price -->
 
-          <b-button type="submit" variant="primary">Edit this Product</b-button>
+          <b-button variant="primary" @click="updateItem">Edit this Product</b-button>
           <b-button variant="danger" class="ml-4" @click="deleteItem">
             Delete this product</b-button
           >
@@ -80,7 +80,7 @@
 
           <!-- Success Message -->
           <b-alert class="mt-4" v-model="showSuccessAlert" variant="success" dismissible>
-            Article deleted Successfully
+            {{ message }}
           </b-alert>
         </b-form>
       </b-col>
@@ -106,6 +106,7 @@ export default {
       },
       id: this.$route.params.id,
       showDismissibleAlert: false,
+      message: "",
       showSuccessAlert: false,
       ErrorMessage: ""
     };
@@ -117,6 +118,18 @@ export default {
     deleteItem() {
       this.$store.commit("removeItem", { id: this.id });
       this.hideModal();
+      this.message = "Article deleted Successfully";
+      this.showSuccessAlert = true;
+    },
+    updateItem() {
+      this.$store.commit("updateItem", {
+        id: this.id,
+        product: this.form.product,
+        color: this.form.color,
+        image: this.form.image,
+        price: this.form.price
+      });
+      this.message = "Article updated Successfully";
       this.showSuccessAlert = true;
     },
     showModal() {
@@ -128,6 +141,12 @@ export default {
   },
   computed: {
     ...mapState(["phones"])
+  },
+  created() {
+    this.form.product = this.phones[this.id].product;
+    this.form.color = this.phones[this.id].color;
+    this.form.image = this.phones[this.id].image;
+    this.form.price = this.phones[this.id].price;
   }
 };
 </script>
