@@ -1,29 +1,34 @@
 <template>
-  <b-card no-body class="overflow-hidden mb-4" style="max-width: 540px;">
-    <b-row no-gutters>
-      <b-col md="6">
-        <b-card-img
-          :src="phone.image ? phone.image : imageDefault"
-          class="rounded-0"
-          style="width: 70%; min-height: 80%;"
-        ></b-card-img>
-      </b-col>
-      <b-col md="6">
-        <b-card-body :title="phone.product">
-          <b-card-text> Color: {{ phone.color }} </b-card-text>
-          <b-card-text> Index: {{ index }} </b-card-text>
-          <b-card-text>
-            Price: {{ phone.price ? phone.price : defaultPrice }} CHF
-          </b-card-text>
-          <b-card-text>
-            <b-button variant="warning" @click="goToEdit(index)"
-              >Edit this product</b-button
-            >
-          </b-card-text>
-        </b-card-body>
-      </b-col>
-    </b-row>
-  </b-card>
+  <div v-if="phone.product">
+    <b-card no-body class="overflow-hidden mb-4" style="max-width: 540px;">
+      <b-row no-gutters>
+        <b-col md="6">
+          <b-card-img
+            :src="phone.image ? phone.image : imageDefault"
+            class="rounded-0"
+            style="width: 70%; min-height: 80%;"
+          ></b-card-img>
+        </b-col>
+        <b-col md="6">
+          <b-card-body :title="phone.product">
+            <b-card-text> Color: {{ phone.color }} </b-card-text>
+            <b-card-text> Index: {{ index }} </b-card-text>
+            <b-card-text>
+              Price: {{ phone.price ? phone.price : defaultPrice }} CHF
+            </b-card-text>
+            <b-card-text>
+              <b-button variant="warning" @click="goToEdit(index)"
+                >Edit this product</b-button
+              >
+              <b-button variant="danger" @click="deleteItem(index)"
+                >Edit this product</b-button
+              >
+            </b-card-text>
+          </b-card-body>
+        </b-col>
+      </b-row>
+    </b-card>
+  </div>
 </template>
 
 <script>
@@ -46,7 +51,11 @@ export default {
   },
   methods: {
     goToEdit(id) {
-      this.$router.push("edit");
+      console.log(id);
+      this.$router.push({ name: "edit", params: { id: id } });
+    },
+    deleteItem(id) {
+      this.$store.commit("removeItem", { id });
     }
   }
 };

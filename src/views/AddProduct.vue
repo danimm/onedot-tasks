@@ -51,13 +51,7 @@
 
       <b-button type="submit" variant="primary">Add Product</b-button>
       <!-- Error Message -->
-      <b-alert
-        class="mt-4"
-        v-show="ErrorMessage"
-        v-model="showDismissibleAlert"
-        variant="danger"
-        dismissible
-      >
+      <b-alert class="mt-4" v-model="showDismissibleAlert" variant="danger" dismissible>
         {{ ErrorMessage }}
       </b-alert>
       <!-- Error Message -->
@@ -85,16 +79,14 @@ export default {
         price: null,
         image: ""
       },
+      colors: [],
       showDismissibleAlert: false,
       showSuccessAlert: false,
       ErrorMessage: "",
-      duplicateColor: null,
       errors: 0
     };
   },
-  created() {
-    console.log(this.phones);
-  },
+  created() {},
   computed: {
     ...mapState(["phones"])
   },
@@ -102,27 +94,23 @@ export default {
     onSubmit(evt) {
       evt.preventDefault();
 
-      let formColor = this.color;
-      const phonesColors = this.phones.filter(phone => phone.color);
-      console.log(phonesColors);
-      debugger;
+      // const colors = this.phones.map(tel => tel.color);
       //validation
-      if (UsedColors.includes(this.color)) {
-        this.ErrorMessage = "Color is already used, take another";
-        this.errors++;
-      }
+      // if (colors.includes(this.color)) {
+      //   this.showDismissibleAlert = true;
+      //   this.ErrorMessage = "Color is already used, take another";
+      //   this.errors++;
+      // }
 
-      if ((this.errors = 0)) {
-        this.$store.commit("addItem", this.form);
-        this.showSuccesAlert = true;
-        this.form.product = "";
-        this.form.color = "";
-        this.form.price = null;
-        this.form.image = "";
-      }
+      this.$store.commit("addItem", this.form);
+      this.showSuccesAlert = true;
+      this.form.product = "";
+      this.form.color = "";
+      this.form.price = null;
+      this.form.image = "";
+      this.showSuccessAlert = true;
 
       //alert message
-      // this.showSuccessAlert = true;
     },
     onReset(evt) {
       evt.preventDefault();

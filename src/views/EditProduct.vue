@@ -1,11 +1,9 @@
 <template>
   <div class="container">
-    <h3>Set the new Properties</h3>
+    <h3>Set the new Properties:</h3>
+    <!-- <h4>{{ phones[id].product || phones[0].product }}</h4> -->
     <b-row>
-      <b-col cols="12" md="8">
-        <CardComponent :phone="form" />
-      </b-col>
-      <b-col cols="6" md="4">
+      <b-col cols="10" md="8" offset-md="2">
         <b-form @submit="onSubmit">
           <!-- Product name -->
           <b-form-group id="input-group-1" label="Name:" label-for="input-1">
@@ -55,7 +53,20 @@
           </b-form-group>
           <!-- Product price -->
 
-          <b-button type="submit" variant="primary">Add Product</b-button>
+          <b-button type="submit" variant="primary">Edit this Product</b-button>
+          <b-button variant="danger" class="ml-4" @click="deleteItem">
+            Delete this product</b-button
+          >
+
+          <b-modal ref="delete-modal" hide-footer title="Confirmation required">
+            <div class="d-block text-center">
+              <h3>Are you sure that you want to delete this product ?</h3>
+              <p>This action can't be reverse</p>
+            </div>
+            <b-button variant="danger" block @click="deleteItem">Delete</b-button>
+            <b-button class="mt-2" block @click="hideModal">Cancel</b-button>
+          </b-modal>
+
           <!-- Error Message -->
           <b-alert
             class="mt-4"
@@ -69,7 +80,7 @@
 
           <!-- Success Message -->
           <b-alert class="mt-4" v-model="showSuccessAlert" variant="success" dismissible>
-            Article added Successfull
+            Article deleted Successfully
           </b-alert>
         </b-form>
       </b-col>
@@ -81,11 +92,10 @@
 </template>
 
 <script>
-import CardComponent from "@/components/CardComponent";
+import { mapState } from "vuex";
 
 export default {
-  name: "editproduct",
-  components: { CardComponent },
+  name: "editProduct",
   data() {
     return {
       form: {
@@ -94,10 +104,30 @@ export default {
         price: null,
         image: ""
       },
+      id: this.$route.params.id,
       showDismissibleAlert: false,
       showSuccessAlert: false,
       ErrorMessage: ""
     };
+  },
+  methods: {
+    onSubmit() {
+      return;
+    },
+    deleteItem() {
+      this.$store.commit("removeItem", { id: this.id });
+      this.hideModal();
+      this.showSuccessAlert = true;
+    },
+    showModal() {
+      this.$refs["delete-modal"].show();
+    },
+    hideModal() {
+      this.$refs["delete-modal"].hide();
+    }
+  },
+  computed: {
+    ...mapState(["phones"])
   }
 };
 </script>

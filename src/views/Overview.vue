@@ -1,7 +1,12 @@
 <template>
   <div class="col offset-2">
-    <div v-for="(phone, index) in phones" :key="index" class="grid-container">
-      <CardComponent :phone="phone" :index="index" />
+    <div>
+      <div v-for="(phone, index) in phones" :key="index" class="grid-container">
+        <CardComponent :phone="phone" :index="index" />
+      </div>
+    </div>
+    <div class="col-6 offset-1">
+      <b-alert show v-if="phones.length < 1">No items to show</b-alert>
     </div>
   </div>
 </template>
@@ -17,11 +22,15 @@ export default {
   components: { CardComponent },
   computed: {
     ...mapState(["phones"])
-  },
-  created() {
-    this.$store.commit("getInitialState");
   }
+  // created() {
+  //   this.$store.commit("getInitialState");
+  // }
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+h2 {
+  text-align: center;
+}
+</style>
