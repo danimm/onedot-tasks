@@ -1,6 +1,6 @@
 <template>
   <div class="col-6 offset-3">
-    <b-form @submit="onSubmit">
+    <b-form @submit="onSubmit" class="text-left">
       <!-- Product name -->
       <b-form-group id="input-group-1" label="Name:" label-for="input-1">
         <b-form-input
@@ -30,7 +30,6 @@
         <b-form-input
           id="input-3"
           v-model="form.image"
-          required
           type="text"
           placeholder="Enter a image src for your product"
         ></b-form-input>
@@ -61,9 +60,6 @@
         Article added Successfull
       </b-alert>
     </b-form>
-    <b-card class="mt-3" header="Form Data Result">
-      <pre class="m-0">{{ form }}</pre>
-    </b-card>
   </div>
 </template>
 

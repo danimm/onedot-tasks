@@ -6,23 +6,18 @@
           <b-card-img
             :src="phone.image ? phone.image : imageDefault"
             class="rounded-0"
-            style="width: 70%; min-height: 80%;"
+            style="width: 70%; min-height: 80%; padding: 10px 0;"
           ></b-card-img>
         </b-col>
         <b-col md="6">
           <b-card-body :title="phone.product">
             <b-card-text> Color: {{ phone.color }} </b-card-text>
-            <b-card-text> Index: {{ index }} </b-card-text>
+            <b-card-text> Price: {{ phone.price ? phone.price : defaultPrice }} CHF </b-card-text>
             <b-card-text>
-              Price: {{ phone.price ? phone.price : defaultPrice }} CHF
-            </b-card-text>
-            <b-card-text>
-              <b-button variant="warning" @click="goToEdit(index)"
-                >Edit this product</b-button
-              >
-              <b-button variant="danger" @click="deleteItem(index)"
-                >Edit this product</b-button
-              >
+              <b-button variant="warning" block class="mb-2" @click="goToEdit(index)">Edit</b-button>
+              <!-- <b-button variant="danger" block class="mt-2" @click="deleteItem(index)"
+                >Delete</b-button
+              > -->
             </b-card-text>
           </b-card-body>
         </b-col>
@@ -61,4 +56,9 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+img {
+  object-fit: contain;
+  height: 100%;
+}
+</style>

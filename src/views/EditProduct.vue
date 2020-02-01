@@ -53,10 +53,21 @@
           </b-form-group>
           <!-- Product price -->
 
-          <b-button variant="primary" @click="updateItem">Edit this Product</b-button>
-          <b-button variant="danger" class="ml-4" @click="deleteItem">
-            Delete this product</b-button
-          >
+          <!-- Confirm changes button -->
+          <b-row>
+            <b-button variant="success" class="mb-2" block @click="updateItem"
+              >Confirm changes</b-button
+            >
+          </b-row>
+          <!-- Confirm changes button -->
+
+          <!-- Delete button -->
+          <b-row>
+            <b-button variant="danger" class="mt-2" block @click="showModal">
+              Delete this product</b-button
+            >
+          </b-row>
+          <!-- Delete button -->
 
           <b-modal ref="delete-modal" hide-footer title="Confirmation required">
             <div class="d-block text-center">
@@ -85,9 +96,6 @@
         </b-form>
       </b-col>
     </b-row>
-    <b-card class="mt-3" header="Form Data Result">
-      <pre class="m-0">{{ form }}</pre>
-    </b-card>
   </div>
 </template>
 
@@ -120,6 +128,10 @@ export default {
       this.hideModal();
       this.message = "Article deleted Successfully";
       this.showSuccessAlert = true;
+      this.form.product = "";
+      this.form.color = "";
+      this.form.image = "";
+      this.form.price = 0;
     },
     updateItem() {
       this.$store.commit("updateItem", {
