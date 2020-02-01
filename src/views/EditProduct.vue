@@ -4,7 +4,7 @@
     <!-- <h4>{{ phones[id].product || phones[0].product }}</h4> -->
     <b-row>
       <b-col cols="10" md="8" offset-md="2">
-        <b-form @submit="onSubmit">
+        <b-form>
           <!-- Product name -->
           <b-form-group id="input-group-1" label="Name:" label-for="input-1">
             <b-form-input
@@ -55,17 +55,13 @@
 
           <!-- Confirm changes button -->
           <b-row>
-            <b-button variant="success" class="mb-2" block @click="updateItem"
-              >Confirm changes</b-button
-            >
+            <b-button variant="success" class="mb-2" block @click="updateItem">Confirm changes</b-button>
           </b-row>
           <!-- Confirm changes button -->
 
           <!-- Delete button -->
           <b-row>
-            <b-button variant="danger" class="mt-2" block @click="showModal">
-              Delete this product</b-button
-            >
+            <b-button variant="danger" class="mt-2" block @click="showModal"> Delete this product</b-button>
           </b-row>
           <!-- Delete button -->
 
@@ -79,12 +75,7 @@
           </b-modal>
 
           <!-- Error Message -->
-          <b-alert
-            class="mt-4"
-            v-model="showDismissibleAlert"
-            variant="danger"
-            dismissible
-          >
+          <b-alert class="mt-4" v-model="showDismissibleAlert" variant="danger" dismissible>
             {{ ErrorMessage }}
           </b-alert>
           <!-- Error Message -->
@@ -120,14 +111,13 @@ export default {
     };
   },
   methods: {
-    onSubmit() {
-      return;
-    },
     deleteItem() {
       this.$store.commit("removeItem", { id: this.id });
       this.hideModal();
       this.message = "Article deleted Successfully";
       this.showSuccessAlert = true;
+
+      // reset form values
       this.form.product = "";
       this.form.color = "";
       this.form.image = "";
@@ -141,6 +131,7 @@ export default {
         image: this.form.image,
         price: this.form.price
       });
+
       this.message = "Article updated Successfully";
       this.showSuccessAlert = true;
     },

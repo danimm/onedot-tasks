@@ -1,11 +1,12 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="add">Add Products</router-link> |
+      <router-link to="/">Home</router-link> | <router-link to="add">Add Products</router-link> |
       <router-link to="/overview">Products overview</router-link>
     </div>
-    <router-view />
+    <transition name="router-anim">
+      <router-view />
+    </transition>
   </div>
 </template>
 
@@ -18,6 +19,8 @@ export default {
 </script>
 
 <style lang="scss">
+@import "https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css";
+
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -36,6 +39,44 @@ export default {
     &.router-link-exact-active {
       color: #42b983;
     }
+  }
+}
+
+.page {
+  position: fixed;
+  width: inherit;
+}
+
+.router-anim-enter-active {
+  animation: coming 0.7s;
+  animation-delay: 0.1s;
+  opacity: 0;
+}
+
+// .router-anim-leave-active {
+//   animation: going 1s;
+// }
+
+.router-anim-leave {
+  animation: going 1s;
+}
+
+@keyframes going {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100px);
+    opacity: 0;
+  }
+}
+@keyframes coming {
+  from {
+    transform: translateX(-100px);
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
   }
 }
 </style>
