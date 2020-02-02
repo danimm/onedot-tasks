@@ -47,7 +47,7 @@ export default {
   methods: {
     goToEdit(id) {
       console.log(id);
-      this.$router.push({ name: "edit", params: { id: id } });
+      this.$router.push({ name: "products-edit", params: { id: id } });
     },
     deleteItem(id) {
       this.$store.commit("removeItem", { id });

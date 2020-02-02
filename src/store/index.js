@@ -5,7 +5,20 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    avaliableColors: ["Dark Grey", "Black", "Silver"],
+    avaliableColors: [
+      {
+        domain: "Stonegrey",
+        range: "Dark Grey"
+      },
+      {
+        domain: "Midnight Black",
+        range: "Black"
+      },
+      {
+        domain: "Mystic Silver",
+        range: "Silver"
+      }
+    ],
     phones: [
       {
         product: "Apple Iphone 6s",
@@ -18,8 +31,7 @@ export default new Vuex.Store({
         product: "Samsung Galaxy S8",
         color: "Midnight Black",
         price: 569,
-        image:
-          "https://static.digitecgalaxus.ch/Files/1/9/8/1/1/5/9/4/Samsung_S10_black.jpg?fit=inside%7C1823:2000"
+        image: "https://static.digitecgalaxus.ch/Files/1/9/8/1/1/5/9/4/Samsung_S10_black.jpg?fit=inside%7C1823:2000"
       },
       {
         product: "Huawei P9",

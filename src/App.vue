@@ -1,8 +1,9 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link> | <router-link to="add">Add Products</router-link> |
-      <router-link to="/overview">Products overview</router-link>
+      <router-link to="/">Home</router-link> | <router-link :to="{ name: 'products-add' }">Add Products</router-link> |
+      <router-link to="add">Add Colors</router-link> |
+      <router-link to="/products">Products overview</router-link>
     </div>
     <transition name="router-anim">
       <router-view />
@@ -19,7 +20,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import "https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css";
+// @import "https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css";
 
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
