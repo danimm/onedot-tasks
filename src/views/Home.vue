@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="home col-12">
     <div class="text-container container">
       <h1>Welcome to the ABC Company</h1>
       <h3>This is the Technical interview to Onedot Company in Schilieren</h3>
@@ -32,7 +32,7 @@ $text-color: #002f67;
 }
 
 .text-container {
-  width: 70vh;
+  width: 80%;
 
   & h3 {
     padding-top: 40px;

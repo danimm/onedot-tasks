@@ -4,7 +4,7 @@
       Set the new Properties:
     </h3>
     <b-row>
-      <b-col cols="10" md="8" offset-md="2">
+      <b-col class="pl-4 pr-4">
         <b-form class="text-left">
           <!-- Color domain -->
           <b-form-group id="input-group-1" label="Domain:" label-for="input-1">
