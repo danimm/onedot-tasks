@@ -5,7 +5,6 @@
     </h3>
     <b-row>
       <b-col cols="10" md="8" offset-md="2">
-        <button v-show="showBack" class="btn btn-primary block" @click="goBack">Back</button>
         <b-form class="text-left">
           <!-- Color domain -->
           <b-form-group id="input-group-1" label="Domain:" label-for="input-1">
@@ -54,6 +53,7 @@
             {{ message }}
           </b-alert>
           <!-- Success Message -->
+          <button v-show="showBack" class="btn btn-primary block" @click="goBack">Back</button>
         </b-form>
       </b-col>
     </b-row>

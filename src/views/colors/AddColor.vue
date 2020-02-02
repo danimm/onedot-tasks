@@ -111,7 +111,7 @@ export default {
       } else if (this.validations.cycles.length > 0) {
         // -------
         // * Cycles error
-        this.ErrorMessage = "Cycles error: you can't change an existing range!";
+        this.ErrorMessage = "Cycles error: you cannot change an existing range!";
 
         // Add to errors array
         this.$store.commit("addColorWithErrors", {
@@ -126,7 +126,7 @@ export default {
       } else if (this.validations.forks.length > 0) {
         // -------
         // * Forks error
-        this.ErrorMessage = "Forks error: This domain already have a different value!";
+        this.ErrorMessage = "Forks error: This domain already has a different value!";
 
         // Add to errors array
         this.$store.commit("addColorWithErrors", {
