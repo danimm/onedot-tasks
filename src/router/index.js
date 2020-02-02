@@ -1,6 +1,8 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
+
+import Home from "@/views/Home.vue";
+import ErrorsTable from "@/views/errors/ErrorsTable.vue";
 
 // Products
 import Products from "@/views/products/Products.vue";
@@ -21,6 +23,11 @@ const routes = [
     path: "/",
     name: "home",
     component: Home
+  },
+  {
+    path: "/errors",
+    name: "errors",
+    component: ErrorsTable
   },
   {
     path: "/colors",

@@ -27,6 +27,11 @@
               <router-link :to="{ name: 'colors-add' }">Add Colors</router-link>
             </b-dropdown-item>
           </b-nav-item-dropdown>
+          <b-nav-item>
+            <router-link to="/errors">
+              Errors
+            </router-link>
+          </b-nav-item>
         </b-navbar-nav>
       </b-navbar>
     </div>

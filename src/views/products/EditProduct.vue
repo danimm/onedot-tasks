@@ -87,6 +87,7 @@
             {{ message }}
           </b-alert>
           <!-- Success Message -->
+          <button v-show="showBack" class="btn btn-primary block" @click="goBack">Back</button>
         </b-form>
       </b-col>
     </b-row>
@@ -117,6 +118,7 @@ export default {
       showDismissibleAlert: false,
       message: "",
       showSuccessAlert: false,
+      showBack: false,
       ErrorMessage: ""
     };
   },
@@ -144,12 +146,16 @@ export default {
 
       this.message = "Article updated Successfully";
       this.showSuccessAlert = true;
+      this.showBack = true;
     },
     showModal() {
       this.$refs["delete-modal"].show();
     },
     hideModal() {
       this.$refs["delete-modal"].hide();
+    },
+    goBack() {
+      this.$router.go(-1);
     }
   },
   computed: {

@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <div class="text-container">
+    <div class="text-container container">
       <h1>Welcome to the ABC Company</h1>
       <h3>This is the Technical interview to Onedot Company in Schilieren</h3>
     </div>
