@@ -55,7 +55,8 @@ export default {
       validations: {
         duplicates: [],
         cycles: [],
-        forks: []
+        forks: [],
+        chains: []
       },
       showDismissibleAlert: false,
       showSuccessAlert: false,
@@ -75,6 +76,10 @@ export default {
       this.validations.duplicates = [];
       this.validations.cycles = [];
 
+      // Refresh validations errors
+      this.validations.duplicates = [];
+      this.validations.cycles = [];
+
       // todo: validation
       // * Duplicates data validation
       this.validations.duplicates = this.avaliableColors.filter(
@@ -88,11 +93,22 @@ export default {
         color => color.domain.toLowerCase() == this.form.domain.toLowerCase()
       );
 
-      // * Forks cycles validation
+      // * Cycles validation
       this.validations.cycles = this.avaliableColors.filter(color => {
-        return color.range.toLowerCase() == this.form.domain.toLowerCase();
+        return (
+          color.range.toLowerCase() == this.form.domain.toLowerCase() &&
+          color.domain.toLowerCase() == this.form.range.toLowerCase()
+        );
       });
-      // -----------------------
+
+      // * Chains validation
+      this.validations.chains = this.avaliableColors.filter(color => {
+        return this.form.domain.toLowerCase() == color.range.toLowerCase();
+      });
+
+      // ----------------> End Validation
+
+      // ? Check wich error
 
       if (this.validations.duplicates.length > 0) {
         // -------
@@ -108,6 +124,7 @@ export default {
         });
 
         this.showDismissibleAlert = true;
+        // -------
       } else if (this.validations.cycles.length > 0) {
         // -------
         // * Cycles error
@@ -133,6 +150,21 @@ export default {
           domain: this.form.domain,
           range: this.form.range,
           typeError: "Forks",
+          message: this.ErrorMessage
+        });
+
+        this.showDismissibleAlert = true;
+        // -------
+      } else if (this.validations.chains.length > 0) {
+        // -------
+        // * Chains error
+        this.ErrorMessage = "Chains error: This domain appears in another Range entry!";
+
+        // Add to errors array
+        this.$store.commit("addColorWithErrors", {
+          domain: this.form.domain,
+          range: this.form.range,
+          typeError: "Chains",
           message: this.ErrorMessage
         });
 
