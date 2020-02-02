@@ -54,7 +54,7 @@ export default new Vuex.Store({
       window.localStorage.removeItem("avaliableColors");
       window.localStorage.setItem("avaliableColors", JSON.stringify(state.avaliableColors));
     },
-    // ------- Products actions
+    // ------- Products mutations
     addProduct(state, payload = {}) {
       //TODO: validation
 
@@ -83,9 +83,9 @@ export default new Vuex.Store({
       state.phones.splice(payload.id, 1);
       window.localStorage.setItem("phones", JSON.stringify(state.phones));
     },
-    // ------- Finish Products actions
+    // ------- Finish Products mutations
 
-    // ------- Start Colors actions
+    // ------- Start Colors mutations
     addColor(state, payload = {}) {
       // Todo: validation
 
@@ -121,7 +121,7 @@ export default new Vuex.Store({
 
       window.localStorage.setItem("errors", JSON.stringify(state.colorsWithValidationErrors));
     }
-    // ------- Finish Colors actions
+    // ------- Finish Colors mutations
   },
   actions: {},
   modules: {}

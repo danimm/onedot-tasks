@@ -96,14 +96,6 @@ export default {
     onSubmit(evt) {
       evt.preventDefault();
 
-      // const colors = this.phones.map(tel => tel.color);
-      //validation
-      // if (colors.includes(this.color)) {
-      //   this.showDismissibleAlert = true;
-      //   this.ErrorMessage = "Color is already used, take another";
-      //   this.errors++;
-      // }
-
       this.$store.commit("addProduct", this.form);
       this.showSuccesAlert = true;
       this.form.product = "";
@@ -113,14 +105,6 @@ export default {
       this.showSuccessAlert = true;
 
       //alert message
-    },
-    onReset(evt) {
-      evt.preventDefault();
-      // Trick to reset/clear native browser form validation state
-      this.show = false;
-      this.$nextTick(() => {
-        this.show = true;
-      });
     }
   }
 };

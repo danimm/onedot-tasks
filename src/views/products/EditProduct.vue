@@ -17,18 +17,7 @@
           <!-- Product name -->
 
           <!-- Product color -->
-          <!-- <b-form-group id="input-group-2" label="Color:" label-for="input-2">
-            <b-form-input
-              id="input-2"
-              v-model="form.color"
-              required
-              type="text"
-              placeholder="Enter a color for your product"
-            ></b-form-input>
-          </b-form-group> -->
-
           <b-form-select v-model="form.selectedColor" :options="form.options"></b-form-select>
-
           <!-- Product color -->
 
           <!-- Product image -->
