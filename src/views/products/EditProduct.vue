@@ -18,7 +18,7 @@
           <!-- Product name -->
 
           <!-- Product color -->
-          <b-form-group id="input-group-2" label="Color:" label-for="input-2">
+          <!-- <b-form-group id="input-group-2" label="Color:" label-for="input-2">
             <b-form-input
               id="input-2"
               v-model="form.color"
@@ -26,7 +26,10 @@
               type="text"
               placeholder="Enter a color for your product"
             ></b-form-input>
-          </b-form-group>
+          </b-form-group> -->
+
+          <b-form-select v-model="form.selectedColor" :options="form.options"></b-form-select>
+
           <!-- Product color -->
 
           <!-- Product image -->
@@ -101,7 +104,14 @@ export default {
         product: "",
         color: "",
         price: null,
-        image: ""
+        image: "",
+        options: [
+          {
+            value: null,
+            text: "Please select a color"
+          }
+        ],
+        selectedColor: null
       },
       id: this.$route.params.id,
       showDismissibleAlert: false,
@@ -127,7 +137,7 @@ export default {
       this.$store.commit("updateProduct", {
         id: this.id,
         product: this.form.product,
-        color: this.form.color,
+        color: this.form.selectedColor,
         image: this.form.image,
         price: this.form.price
       });
@@ -143,13 +153,22 @@ export default {
     }
   },
   computed: {
-    ...mapState(["phones"])
+    ...mapState(["phones", "avaliableColors"])
   },
   created() {
     this.form.product = this.phones[this.id].product;
     this.form.color = this.phones[this.id].color;
     this.form.image = this.phones[this.id].image;
     this.form.price = this.phones[this.id].price;
+
+    // colors
+
+    this.avaliableColors.map(color => {
+      this.form.options.push({
+        value: color.range,
+        text: color.range
+      });
+    });
   }
 };
 </script>
