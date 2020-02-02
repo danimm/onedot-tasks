@@ -17,10 +17,6 @@ export default new Vuex.Store({
       {
         domain: "Mystic Silver",
         range: "Silver"
-      },
-      {
-        domain: "Light Rosa",
-        range: "Rosa"
       }
     ],
     colorsWithValidationErrors: [],

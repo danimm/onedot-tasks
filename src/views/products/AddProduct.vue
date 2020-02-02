@@ -18,7 +18,7 @@
       <!-- Product color -->
 
       <!-- Product image -->
-      <b-form-group id="input-group-2" label="Image (optional):" label-for="input-2">
+      <b-form-group id="input-group-2" label="Image (optional):" label-for="input-2" class="pt-3">
         <b-form-input
           id="input-3"
           v-model="form.image"
@@ -125,3 +125,9 @@ export default {
   }
 };
 </script>
+
+<style lang="scss">
+.form-group {
+  margin-bottom: 20px;
+}
+</style>

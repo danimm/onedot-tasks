@@ -1,6 +1,9 @@
 <template>
   <div class="home">
-    <h1>Welcome to the ABC Company</h1>
+    <div class="text-container">
+      <h1>Welcome to the ABC Company</h1>
+      <h3>This is the Technical interview to Onedot Company in Schilieren</h3>
+    </div>
   </div>
 </template>
 
@@ -14,13 +17,29 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+$text-color: #002f67;
 .home {
   height: 80vh;
-  background-position: center;
+  background-position: 60% 50%;
   background-size: cover;
-  background-image: url("https://images.unsplash.com/photo-1563013544-824ae1b704d3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80");
+  background-image: url("https://www.onedot.com/wp-content/uploads/2015/04/onedot-background.jpg");
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  flex-flow: column;
+  text-align: left;
 }
-h1 {
-  color: white;
+
+.text-container {
+  width: 70vh;
+
+  & h3 {
+    padding-top: 40px;
+  }
+}
+h1,
+h3 {
+  color: $text-color;
 }
 </style>
