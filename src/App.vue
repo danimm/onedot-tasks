@@ -2,7 +2,8 @@
   <div id="app">
     <div id="nav">
       <router-link to="/">Home</router-link> | <router-link :to="{ name: 'products-add' }">Add Products</router-link> |
-      <router-link to="add">Add Colors</router-link> |
+      <router-link :to="{ name: 'colors-add' }">Add Colors</router-link> |
+      <router-link to="/colors">Colors overview</router-link> |
       <router-link to="/products">Products overview</router-link>
     </div>
     <transition name="router-anim">

@@ -2,9 +2,16 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 
-import Products from "@/views/Products.vue";
-import Overview from "@/views/Overview.vue";
-import AddProduct from "@/views/AddProduct.vue";
+// Products
+import Products from "@/views/products/Products.vue";
+import productsOverview from "@/views/products/ProductsOverview.vue";
+import AddProduct from "@/views/products/AddProduct.vue";
+import EditProduct from "@/views/products/EditProduct.vue";
+
+// Colors
+import Colors from "@/views/colors/Colors.vue";
+import colorsOverview from "@/views/colors/ColorsOverview.vue";
+import AddColor from "@/views/colors/AddColor.vue";
 
 Vue.use(VueRouter);
 
@@ -15,14 +22,29 @@ const routes = [
     component: Home
   },
   {
+    path: "/colors",
+    component: Colors,
+    children: [
+      {
+        path: "/",
+        name: "colors-overview",
+        component: colorsOverview
+      },
+      {
+        path: "add",
+        name: "colors-add",
+        component: AddColor
+      }
+    ]
+  },
+  {
     path: "/products",
     component: Products,
-    // component: () => import(/* webpackChunkName: "about" */ "../views/Overview.vue"),
     children: [
       {
         path: "/",
         name: "product-overview",
-        component: Overview
+        component: productsOverview
       },
       {
         path: "add",
@@ -32,7 +54,7 @@ const routes = [
       {
         path: "edit/:id",
         name: "products-edit",
-        component: () => import(/* webpackChunkName: "about" */ "../views/EditProduct.vue")
+        component: EditProduct
       }
     ]
   }

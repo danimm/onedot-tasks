@@ -1,6 +1,6 @@
 <template>
   <div v-if="phone.product">
-    <b-card no-body class="overflow-hidden mb-4" style="max-width: 540px;">
+    <b-card no-body class="overflow-hidden mb-4">
       <b-row no-gutters>
         <b-col md="6">
           <b-card-img
@@ -46,7 +46,6 @@ export default {
   },
   methods: {
     goToEdit(id) {
-      console.log(id);
       this.$router.push({ name: "products-edit", params: { id: id } });
     },
     deleteItem(id) {

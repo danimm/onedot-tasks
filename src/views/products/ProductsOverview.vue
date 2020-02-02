@@ -1,13 +1,13 @@
 <template>
-  <div class="col offset-2">
+  <div class="container">
     <div>
-      <div v-for="(phone, index) in phones" :key="index" class="grid-container">
+      <div v-for="(phone, index) in phones" :key="index">
         <CardComponent :phone="phone" :index="index" />
       </div>
     </div>
-    <div class="col-6 offset-1">
-      <b-alert show v-if="phones.length < 1">No items to show</b-alert>
-    </div>
+    <!-- <div class="col-6 offset-1"> -->
+    <b-alert show v-if="phones.length < 1">No items to show</b-alert>
+    <!-- </div> -->
   </div>
 </template>
 

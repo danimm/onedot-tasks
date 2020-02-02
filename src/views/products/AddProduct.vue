@@ -1,5 +1,5 @@
 <template>
-  <div class="col-6 offset-3">
+  <div class="container">
     <b-form @submit="onSubmit" class="text-left">
       <!-- Product name -->
       <b-form-group id="input-group-1" label="Name:" label-for="input-1">
@@ -59,6 +59,7 @@
       <b-alert class="mt-4" v-model="showSuccessAlert" variant="success" dismissible>
         Article added Successfull
       </b-alert>
+      <!-- Success Message -->
     </b-form>
   </div>
 </template>
@@ -98,7 +99,7 @@ export default {
       //   this.errors++;
       // }
 
-      this.$store.commit("addItem", this.form);
+      this.$store.commit("addProduct", this.form);
       this.showSuccesAlert = true;
       this.form.product = "";
       this.form.color = "";

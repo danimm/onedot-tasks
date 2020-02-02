@@ -48,7 +48,8 @@ export default new Vuex.Store({
       window.localStorage.setItem("phones", JSON.stringify(state.phones));
       // state.phones = JSON.parse(window.localStorage.getItem("phones")) || [];
     },
-    addItem(state, payload = {}) {
+    // Products actions
+    addProduct(state, payload = {}) {
       //TODO: validation
 
       state.phones.push({
@@ -60,23 +61,32 @@ export default new Vuex.Store({
 
       window.localStorage.setItem("phones", JSON.stringify(state.phones));
     },
-    updateItem(state, payload) {
+    updateProduct(state, payload) {
       // Todo: validation
-      console.log(payload);
       const newValues = {};
       newValues.product = payload.product;
       newValues.color = payload.color;
       newValues.image = payload.image;
       newValues.price = payload.price;
       state.phones.splice(payload.id, 1, newValues);
-      console.log(state.phones);
       window.localStorage.setItem("phones", JSON.stringify(state.phones));
     },
-    removeItem(state, payload = {}) {
+    removeColor(state, payload = {}) {
       // Todo: validation
 
       state.phones.splice(payload.id, 1);
       window.localStorage.setItem("phones", JSON.stringify(state.phones));
+    },
+    // Products actions
+
+    // Colors actions
+    addColor(state, payload = {}) {
+      // Todo: validation
+
+      state.avaliableColors.push({
+        domain: payload.domain,
+        range: payload.range
+      });
     }
   },
   actions: {},

@@ -67,8 +67,8 @@
 
           <b-modal ref="delete-modal" hide-footer title="Confirmation required">
             <div class="d-block text-center">
-              <h3>Are you sure that you want to delete this product ?</h3>
-              <p>This action can't be reverse</p>
+              <h3>Are you sure you want to delete this product ?</h3>
+              <p>This change is not reversible</p>
             </div>
             <b-button variant="danger" block @click="deleteItem">Delete</b-button>
             <b-button class="mt-2" block @click="hideModal">Cancel</b-button>
@@ -112,7 +112,7 @@ export default {
   },
   methods: {
     deleteItem() {
-      this.$store.commit("removeItem", { id: this.id });
+      this.$store.commit("removeColor", { id: this.id });
       this.hideModal();
       this.message = "Article deleted Successfully";
       this.showSuccessAlert = true;
@@ -124,7 +124,7 @@ export default {
       this.form.price = 0;
     },
     updateItem() {
-      this.$store.commit("updateItem", {
+      this.$store.commit("updateProduct", {
         id: this.id,
         product: this.form.product,
         color: this.form.color,
