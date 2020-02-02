@@ -1,10 +1,34 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link> | <router-link :to="{ name: 'products-add' }">Add Products</router-link> |
-      <router-link :to="{ name: 'colors-add' }">Add Colors</router-link> |
-      <router-link to="/colors">Colors overview</router-link> |
-      <router-link to="/products">Products overview</router-link>
+      <b-navbar type="light">
+        <b-navbar-nav>
+          <b-nav-item>
+            <router-link to="/">
+              Home
+            </router-link>
+          </b-nav-item>
+
+          <!-- Navbar dropdowns -->
+          <b-nav-item-dropdown text="Products" left>
+            <b-dropdown-item>
+              <router-link to="/products">Products overview</router-link>
+            </b-dropdown-item>
+            <b-dropdown-item>
+              <router-link :to="{ name: 'products-add' }">Add Products</router-link>
+            </b-dropdown-item>
+          </b-nav-item-dropdown>
+
+          <b-nav-item-dropdown text="Colors" left>
+            <b-dropdown-item>
+              <router-link to="/colors">Colors overview</router-link>
+            </b-dropdown-item>
+            <b-dropdown-item>
+              <router-link :to="{ name: 'colors-add' }">Add Colors</router-link>
+            </b-dropdown-item>
+          </b-nav-item-dropdown>
+        </b-navbar-nav>
+      </b-navbar>
     </div>
     <transition name="router-anim">
       <router-view />

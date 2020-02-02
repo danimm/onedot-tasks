@@ -23,6 +23,7 @@ export default new Vuex.Store({
         range: "Rosa"
       }
     ],
+    colorsWithValidationErrors: [],
     phones: [
       {
         product: "Apple Iphone 6s",
@@ -50,13 +51,14 @@ export default new Vuex.Store({
     getInitialState(state) {
       // * Set phones into LocalStorage
       window.localStorage.removeItem("phones");
+      window.localStorage.removeItem("errors");
       window.localStorage.setItem("phones", JSON.stringify(state.phones));
 
       // * Set colors into LocalStorage
       window.localStorage.removeItem("avaliableColors");
       window.localStorage.setItem("avaliableColors", JSON.stringify(state.avaliableColors));
     },
-    // Products actions
+    // ------- Products actions
     addProduct(state, payload = {}) {
       //TODO: validation
 
@@ -85,9 +87,9 @@ export default new Vuex.Store({
       state.phones.splice(payload.id, 1);
       window.localStorage.setItem("phones", JSON.stringify(state.phones));
     },
-    // Products actions
+    // ------- Finish Products actions
 
-    // Colors actions
+    // ------- Start Colors actions
     addColor(state, payload = {}) {
       // Todo: validation
 
@@ -95,7 +97,19 @@ export default new Vuex.Store({
         domain: payload.domain,
         range: payload.range
       });
+    },
+
+    addColorWithErrors(state, payload = {}) {
+      state.colorsWithValidationErrors.push({
+        domain: payload.domain,
+        range: payload.range,
+        typeError: payload.typeError,
+        message: payload.message
+      });
+
+      window.localStorage.setItem("errors", JSON.stringify(state.colorsWithValidationErrors));
     }
+    // ------- Finish Colors actions
   },
   actions: {},
   modules: {}

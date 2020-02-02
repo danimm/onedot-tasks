@@ -63,17 +63,20 @@ export default {
     };
   },
   computed: {
-    ...mapState(["avaliableColors"])
+    ...mapState(["avaliableColors", "colorsWithValidationErrors"])
   },
   methods: {
     onSubmit(evt) {
       evt.preventDefault();
       this.showDismissibleAlert = false;
 
+      // Refresh validations errors
+      this.validations.duplicates = [];
+      this.validations.cycles = [];
+
       // todo: validation
       // Duplicates
       this.validations.duplicates = this.avaliableColors.filter(color => {
-        // return color.domain.toLowerCase().includes(this.form.domain.toLowerCase());
         return color.domain.toLowerCase() == this.form.domain.toLowerCase();
       });
 
@@ -81,15 +84,35 @@ export default {
       this.validations.cycles = this.avaliableColors.filter(color => {
         return color.range.toLowerCase() == this.form.domain.toLowerCase();
       });
+      // -----------------------
 
       if (this.validations.duplicates.length > 0) {
-        this.ErrorMessage = "This domain already exist";
+        this.ErrorMessage = "Duplicates error: This domain already exist";
+
+        // Add to errors array
+        this.$store.commit("addColorWithErrors", {
+          domain: this.form.domain,
+          range: this.form.range,
+          typeError: "Duplicates",
+          message: this.ErrorMessage
+        });
+
         this.showDismissibleAlert = true;
       } else if (this.validations.cycles.length > 0) {
-        this.ErrorMessage = "You can't change a existence color";
+        this.ErrorMessage = "Cycles error: you can't change an existing range";
+
+        // Add to errors array
+        this.$store.commit("addColorWithErrors", {
+          domain: this.form.domain,
+          range: this.form.range,
+          typeError: "Cycles",
+          message: this.ErrorMessage
+        });
+
         this.showDismissibleAlert = true;
+        // --------------
       } else {
-        // No errors
+        // No errors, adding Color
         this.$store.commit("addColor", this.form);
         this.showSuccessAlert = true;
 
