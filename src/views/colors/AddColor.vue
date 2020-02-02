@@ -54,7 +54,8 @@ export default {
       },
       validations: {
         duplicates: [],
-        cycles: []
+        cycles: [],
+        forks: []
       },
       showDismissibleAlert: false,
       showSuccessAlert: false,
@@ -75,20 +76,27 @@ export default {
       this.validations.cycles = [];
 
       // todo: validation
-      // Duplicates data
+      // * Duplicates data validation
       this.validations.duplicates = this.avaliableColors.filter(
         color =>
           color.domain.toLowerCase() == this.form.domain.toLowerCase() &&
           color.range.toLowerCase() == this.form.range.toLowerCase()
       );
 
-      // Cycles
+      // * Forks data validation
+      this.validations.forks = this.avaliableColors.filter(
+        color => color.domain.toLowerCase() == this.form.domain.toLowerCase()
+      );
+
+      // * Forks cycles validation
       this.validations.cycles = this.avaliableColors.filter(color => {
         return color.range.toLowerCase() == this.form.domain.toLowerCase();
       });
       // -----------------------
 
       if (this.validations.duplicates.length > 0) {
+        // -------
+        // * Duplicates error
         this.ErrorMessage = "Duplicates error: This domain already exist";
 
         // Add to errors array
@@ -101,7 +109,9 @@ export default {
 
         this.showDismissibleAlert = true;
       } else if (this.validations.cycles.length > 0) {
-        this.ErrorMessage = "Cycles error: you can't change an existing range";
+        // -------
+        // * Cycles error
+        this.ErrorMessage = "Cycles error: you can't change an existing range!";
 
         // Add to errors array
         this.$store.commit("addColorWithErrors", {
@@ -112,7 +122,22 @@ export default {
         });
 
         this.showDismissibleAlert = true;
-        // --------------
+        // -------
+      } else if (this.validations.forks.length > 0) {
+        // -------
+        // * Forks error
+        this.ErrorMessage = "Forks error: This domain already have a different value!";
+
+        // Add to errors array
+        this.$store.commit("addColorWithErrors", {
+          domain: this.form.domain,
+          range: this.form.range,
+          typeError: "Forks",
+          message: this.ErrorMessage
+        });
+
+        this.showDismissibleAlert = true;
+        // -------
       } else {
         // No errors, adding Color
         this.$store.commit("addColor", this.form);

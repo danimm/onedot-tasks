@@ -14,15 +14,7 @@
       <!-- Product name -->
 
       <!-- Product color -->
-      <b-form-group id="input-group-2" label="Color:" label-for="input-2">
-        <b-form-input
-          id="input-2"
-          v-model="form.color"
-          required
-          type="text"
-          placeholder="Enter a color for your product"
-        ></b-form-input>
-      </b-form-group>
+      <b-form-select v-model="form.selectedColor" :options="form.options"></b-form-select>
       <!-- Product color -->
 
       <!-- Product image -->
@@ -72,20 +64,33 @@ export default {
     return {
       form: {
         product: "",
-        color: "",
         price: null,
-        image: ""
+        image: "",
+        options: [
+          {
+            value: null,
+            text: "Please select a color"
+          }
+        ],
+        selectedColor: null
       },
-      colors: [],
       showDismissibleAlert: false,
       showSuccessAlert: false,
       ErrorMessage: "",
       errors: 0
     };
   },
-  created() {},
+  created() {
+    // Getcolors
+    this.avaliableColors.map(color => {
+      this.form.options.push({
+        value: color.range,
+        text: color.range
+      });
+    });
+  },
   computed: {
-    ...mapState(["phones"])
+    ...mapState(["phones", "avaliableColors"])
   },
   methods: {
     onSubmit(evt) {
