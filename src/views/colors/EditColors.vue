@@ -1,9 +1,11 @@
 <template>
   <div class="container">
-    <h3>Set the new Properties:</h3>
-
+    <h3>
+      Set the new Properties:
+    </h3>
     <b-row>
       <b-col cols="10" md="8" offset-md="2">
+        <button v-show="showBack" class="btn btn-primary block" @click="goBack">Back</button>
         <b-form class="text-left">
           <!-- Color domain -->
           <b-form-group id="input-group-1" label="Domain:" label-for="input-1">
@@ -72,6 +74,7 @@ export default {
       showDismissibleAlert: false,
       message: "",
       showSuccessAlert: false,
+      showBack: false,
       ErrorMessage: ""
     };
   },
@@ -100,6 +103,11 @@ export default {
 
       this.message = "Color updated successfully";
       this.showSuccessAlert = true;
+      this.showBack = true;
+    },
+
+    goBack() {
+      this.$router.go(-1);
     }
   },
   created() {

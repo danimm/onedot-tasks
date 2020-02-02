@@ -1,6 +1,11 @@
 <template>
   <div>
     <div class="container">
+      <!-- Success Message -->
+      <b-alert class="mt-4" v-model="showSuccessAlert" variant="success" dismissible>
+        Color deleted successfully
+      </b-alert>
+      <!-- Success Message -->
       <table class="table striped">
         <thead>
           <tr>
@@ -16,8 +21,8 @@
             <td>{{ color.domain }}</td>
             <td>{{ color.range }}</td>
             <td>
-              <button class="btn btn-warning mr-4">Edit</button>
-              <button class="btn btn-danger">Delete</button>
+              <button class="btn btn-warning mr-4" @click="goToEdit(index)">Edit</button>
+              <button class="btn btn-danger" @click="deleteItem(index)">Delete</button>
             </td>
           </tr>
         </tbody>
@@ -32,11 +37,21 @@ export default {
   name: "colors-overview",
   data() {
     return {
-      fields: ["index", "Domain", "Range"]
+      fields: ["index", "Domain", "Range"],
+      showSuccessAlert: false
     };
   },
   computed: {
     ...mapState(["avaliableColors"])
+  },
+  methods: {
+    goToEdit(id) {
+      this.$router.push({ name: "colors-edit", params: { id } });
+    },
+    deleteItem(id) {
+      this.$store.commit("deleteColor", { id });
+      this.showSuccessAlert = true;
+    }
   }
 };
 </script>

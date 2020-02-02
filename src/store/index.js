@@ -99,6 +99,15 @@ export default new Vuex.Store({
       });
     },
 
+    updateColor(state, payload) {
+      // Todo: validation
+      state.avaliableColors.splice(payload.id, 1, {
+        domain: payload.domain,
+        range: payload.range
+      });
+      window.localStorage.setItem("avaliableColors", JSON.stringify(state.avaliableColors));
+    },
+
     deleteColor(state, payload = {}) {
       // Todo: validation
 
