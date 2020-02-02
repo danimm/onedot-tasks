@@ -70,6 +70,12 @@ export default {
         domain: "",
         range: ""
       },
+      validations: {
+        duplicates: [],
+        cycles: [],
+        forks: [],
+        chains: []
+      },
       id: this.$route.params.id,
       showDismissibleAlert: false,
       message: "",
@@ -79,7 +85,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(["avaliableColors"])
+    ...mapState(["avaliableColors", "colorsWithValidationErrors"])
   },
   methods: {
     deleteItem() {
@@ -95,15 +101,122 @@ export default {
     },
 
     updateItem() {
-      this.$store.commit("updateColor", {
-        id: this.id,
-        domain: this.form.domain,
-        range: this.form.range
+      this.showDismissibleAlert = false;
+
+      // Refresh validations errors
+      this.validations.duplicates = [];
+      this.validations.cycles = [];
+
+      // todo: validation
+      // * Duplicates data validation
+      this.validations.duplicates = this.avaliableColors.filter(
+        color =>
+          color.domain.toLowerCase() == this.form.domain.toLowerCase() &&
+          color.range.toLowerCase() == this.form.range.toLowerCase()
+      );
+
+      // * Forks data validation
+      this.validations.forks = this.avaliableColors.filter(
+        color => color.domain.toLowerCase() == this.form.domain.toLowerCase()
+      );
+
+      // * Cycles validation
+      this.validations.cycles = this.avaliableColors.filter(color => {
+        return (
+          color.range.toLowerCase() == this.form.domain.toLowerCase() &&
+          color.domain.toLowerCase() == this.form.range.toLowerCase()
+        );
       });
 
-      this.message = "Color updated successfully";
-      this.showSuccessAlert = true;
-      this.showBack = true;
+      // * Chains validation
+      this.validations.chains = this.avaliableColors.filter(color => {
+        return this.form.domain.toLowerCase() == color.range.toLowerCase();
+      });
+
+      // ----------------> End Validation
+
+      // ? Check wich error
+
+      if (this.validations.duplicates.length > 0) {
+        // -------
+        // * Duplicates error
+        this.ErrorMessage = "Duplicates error: This domain already exist";
+
+        // Add to errors array
+        this.$store.commit("addColorWithErrors", {
+          domain: this.form.domain,
+          range: this.form.range,
+          typeError: "Duplicates",
+          message: this.ErrorMessage
+        });
+
+        this.showDismissibleAlert = true;
+        // -------
+      } else if (this.validations.cycles.length > 0) {
+        // -------
+        // * Cycles error
+        this.ErrorMessage = "Cycles error: you cannot change an existing range!";
+
+        // Add to errors array
+        this.$store.commit("addColorWithErrors", {
+          domain: this.form.domain,
+          range: this.form.range,
+          typeError: "Cycles",
+          message: this.ErrorMessage
+        });
+
+        this.showDismissibleAlert = true;
+        // -------
+      } else if (this.validations.forks.length > 0) {
+        // -------
+        // * Forks error
+        this.ErrorMessage = "Forks error: This domain already has a different value!";
+
+        // Add to errors array
+        this.$store.commit("addColorWithErrors", {
+          domain: this.form.domain,
+          range: this.form.range,
+          typeError: "Forks",
+          message: this.ErrorMessage
+        });
+
+        this.showDismissibleAlert = true;
+        // -------
+      } else if (this.validations.chains.length > 0) {
+        // -------
+        // * Chains error
+        this.ErrorMessage = "Chains error: This domain appears in another Range entry!";
+
+        // Add to errors array
+        this.$store.commit("addColorWithErrors", {
+          domain: this.form.domain,
+          range: this.form.range,
+          typeError: "Chains",
+          message: this.ErrorMessage
+        });
+
+        this.showDismissibleAlert = true;
+        // -------
+      } else {
+        // No errors, updateColor Color
+        this.$store.commit("updateColor", {
+          id: this.id,
+          domain: this.form.domain,
+          range: this.form.range
+        });
+        this.showSuccessAlert = true;
+
+        // reset values
+        this.form.domain = "";
+        this.form.range = "";
+        this.validations.duplicates = [];
+        this.validations.cycles = [];
+
+        // success
+        this.message = "Color updated successfully";
+        this.showSuccessAlert = true;
+        this.showBack = true;
+      }
     },
 
     goBack() {
