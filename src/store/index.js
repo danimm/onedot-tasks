@@ -17,6 +17,10 @@ export default new Vuex.Store({
       {
         domain: "Mystic Silver",
         range: "Silver"
+      },
+      {
+        domain: "Light Rosa",
+        range: "Rosa"
       }
     ],
     phones: [
@@ -44,9 +48,13 @@ export default new Vuex.Store({
   },
   mutations: {
     getInitialState(state) {
+      // * Set phones into LocalStorage
       window.localStorage.removeItem("phones");
       window.localStorage.setItem("phones", JSON.stringify(state.phones));
-      // state.phones = JSON.parse(window.localStorage.getItem("phones")) || [];
+
+      // * Set colors into LocalStorage
+      window.localStorage.removeItem("avaliableColors");
+      window.localStorage.setItem("avaliableColors", JSON.stringify(state.avaliableColors));
     },
     // Products actions
     addProduct(state, payload = {}) {
