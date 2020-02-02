@@ -81,7 +81,7 @@ export default new Vuex.Store({
       state.phones.splice(payload.id, 1, newValues);
       window.localStorage.setItem("phones", JSON.stringify(state.phones));
     },
-    removeColor(state, payload = {}) {
+    deleteProduct(state, payload = {}) {
       // Todo: validation
 
       state.phones.splice(payload.id, 1);
@@ -97,6 +97,13 @@ export default new Vuex.Store({
         domain: payload.domain,
         range: payload.range
       });
+    },
+
+    deleteColor(state, payload = {}) {
+      // Todo: validation
+
+      state.avaliableColors.splice(payload.id, 1);
+      window.localStorage.setItem("avaliableColors", JSON.stringify(state.avaliableColors));
     },
 
     addColorWithErrors(state, payload = {}) {

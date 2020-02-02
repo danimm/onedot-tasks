@@ -12,6 +12,7 @@ import EditProduct from "@/views/products/EditProduct.vue";
 import Colors from "@/views/colors/Colors.vue";
 import colorsOverview from "@/views/colors/ColorsOverview.vue";
 import AddColor from "@/views/colors/AddColor.vue";
+import EditColors from "@/views/colors/EditColors.vue";
 
 Vue.use(VueRouter);
 
@@ -34,6 +35,11 @@ const routes = [
         path: "add",
         name: "colors-add",
         component: AddColor
+      },
+      {
+        path: "edit/:id",
+        name: "colors-edit",
+        component: EditColors
       }
     ]
   },

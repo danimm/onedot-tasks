@@ -1,7 +1,6 @@
 <template>
   <div class="container">
     <h3>Set the new Properties:</h3>
-    <!-- <h4>{{ phones[id].product || phones[0].product }}</h4> -->
     <b-row>
       <b-col cols="10" md="8" offset-md="2">
         <b-form>
@@ -87,6 +86,7 @@
           <b-alert class="mt-4" v-model="showSuccessAlert" variant="success" dismissible>
             {{ message }}
           </b-alert>
+          <!-- Success Message -->
         </b-form>
       </b-col>
     </b-row>
@@ -122,7 +122,7 @@ export default {
   },
   methods: {
     deleteItem() {
-      this.$store.commit("removeColor", { id: this.id });
+      this.$store.commit("deleteProduct", { id: this.id });
       this.hideModal();
       this.message = "Article deleted Successfully";
       this.showSuccessAlert = true;
