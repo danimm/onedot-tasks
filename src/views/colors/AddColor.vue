@@ -102,6 +102,7 @@ export default {
       });
 
       // * Chains validation
+
       this.validations.chains = this.avaliableColors.filter(color => {
         return this.form.domain.toLowerCase() == color.range.toLowerCase();
       });

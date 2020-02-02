@@ -112,12 +112,17 @@ export default {
       this.validations.duplicates = this.avaliableColors.filter(
         color =>
           color.domain.toLowerCase() == this.form.domain.toLowerCase() &&
-          color.range.toLowerCase() == this.form.range.toLowerCase()
+          color.range.toLowerCase() == this.form.range.toLowerCase() &&
+          // only if it's not an update of the same object
+          this.avaliableColors.findIndex(element => element == color) != parseInt(this.id)
       );
 
       // * Forks data validation
       this.validations.forks = this.avaliableColors.filter(
-        color => color.domain.toLowerCase() == this.form.domain.toLowerCase()
+        color =>
+          color.domain.toLowerCase() == this.form.domain.toLowerCase() &&
+          this.avaliableColors.findIndex(element => element == color) != parseInt(this.id)
+        // only if it's not an update of the same object
       );
 
       // * Cycles validation
