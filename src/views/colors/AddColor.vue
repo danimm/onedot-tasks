@@ -75,10 +75,12 @@ export default {
       this.validations.cycles = [];
 
       // todo: validation
-      // Duplicates
-      this.validations.duplicates = this.avaliableColors.filter(color => {
-        return color.domain.toLowerCase() == this.form.domain.toLowerCase();
-      });
+      // Duplicates data
+      this.validations.duplicates = this.avaliableColors.filter(
+        color =>
+          color.domain.toLowerCase() == this.form.domain.toLowerCase() &&
+          color.range.toLowerCase() == this.form.range.toLowerCase()
+      );
 
       // Cycles
       this.validations.cycles = this.avaliableColors.filter(color => {
