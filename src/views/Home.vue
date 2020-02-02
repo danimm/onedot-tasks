@@ -2,7 +2,7 @@
   <div class="home col-12">
     <div class="text-container container">
       <h1>Welcome to the ABC Company</h1>
-      <h3>This is the Technical interview to Onedot Company in Schilieren</h3>
+      <h3>This is the technical test of the application of the Onedot company in Schlieren.</h3>
     </div>
   </div>
 </template>
